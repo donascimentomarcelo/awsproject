@@ -16,7 +16,13 @@ public class TestController {
 
     @GetMapping("/dog/{name}")
     public ResponseEntity<?> dogText(@PathVariable String name) {
-        LOG.info("Test controller ", name);
+        LOG.info("Test controller " + name);
         return ResponseEntity.ok("Name " + name);
+    }
+
+    @GetMapping("/crane")
+    public ResponseEntity<?> crane() {
+        LOG.info("Crane controller");
+        return ResponseEntity.ok().build();
     }
 }
