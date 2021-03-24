@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: awsproject
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  datasource:
+    url: jdbc:mariadb://localhost:3306/aws_project
+    username: admin
+    password: 12345678
+    driverClassName: org.mariadb.jdbc.Driver
