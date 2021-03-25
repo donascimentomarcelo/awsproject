@@ -24,7 +24,7 @@ public class ProductPublisher {
 
     public ProductPublisher(
             AmazonSNS snsClient,
-            @Qualifier("productEventTopic")Topic productEventTopic,
+            @Qualifier("productEventTopic") Topic productEventTopic,
             ObjectMapper objectMapper) {
         this.snsClient = snsClient;
         this.productEventTopic = productEventTopic;
@@ -35,7 +35,7 @@ public class ProductPublisher {
         ProductEvent productEvent = new ProductEvent();
         productEvent.setProductId(product.getId());
         productEvent.setCode(product.getCode());
-        productEvent.setUsername(product.getName());
+        productEvent.setUsername(username);
 
         Envelope envelope = new Envelope();
         envelope.setEventType(eventType);
