@@ -5,6 +5,13 @@ publisher/build/
 !**/publisher/src/main/**/build/
 !**/publisher/src/test/**/build/
 
+consumer/HELP.md
+consumer/.gradle
+consumer/build/
+!consumer/gradle/wrapper/gradle-wrapper.jar
+!**/consumer/src/main/**/build/
+!**/consumer/src/test/**/build/
+
 ### STS ###
 .apt_generated
 .classpath
@@ -25,6 +32,9 @@ bin/
 out/
 !**/publisher/src/main/**/out/
 !**/publisher/src/test/**/out/
+
+!**/consumer/src/main/**/out/
+!**/consumer/src/test/**/out/
 
 ### NetBeans ###
 /nbproject/private/
