@@ -1,7 +1,9 @@
 package br.com.awsproject.controller;
 
+import br.com.awsproject.enums.EventType;
 import br.com.awsproject.model.Product;
 import br.com.awsproject.repository.ProductRepository;
+import br.com.awsproject.service.ProductPublisher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,9 @@ public class ProductController {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private ProductPublisher productPublisher;
 
     @GetMapping
     public Iterable<Product> findAll() {
@@ -31,6 +36,7 @@ public class ProductController {
     @PostMapping
     public ResponseEntity<Product> save(@RequestBody Product product) {
         Product obj = productRepository.save(product);
+        productPublisher.publishProductEvent(obj, EventType.PRODUCT_CREATED, "system");
         return new ResponseEntity<Product>(obj, HttpStatus.CREATED);
     }
 
@@ -46,6 +52,8 @@ public class ProductController {
 
         productRepository.save(product);
 
+        productPublisher.publishProductEvent(product, EventType.PRODUCT_UPDATED, "system");
+
         return new ResponseEntity<Product>(product, HttpStatus.NO_CONTENT);
     }
 
@@ -59,6 +67,8 @@ public class ProductController {
         product.setId(id);
 
         productRepository.delete(product);
+
+        productPublisher.publishProductEvent(product, EventType.PRODUCT_DELETED, "system");
 
         return new ResponseEntity<Product>(product, HttpStatus.NO_CONTENT);
     }
