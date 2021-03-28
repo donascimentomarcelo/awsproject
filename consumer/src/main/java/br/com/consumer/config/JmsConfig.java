@@ -5,6 +5,7 @@ import com.amazon.sqs.javamessaging.SQSConnectionFactory;
 import com.amazonaws.auth.DefaultAWSCredentialsProviderChain;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
@@ -16,13 +17,13 @@ import javax.jms.Session;
 @EnableJms
 public class JmsConfig {
 
-
     @Value("${aws.region}")
     private String awsRegion;
 
     private SQSConnectionFactory sqsConnectionFactory;
 
-    public DefaultJmsListenerContainerFactory defaultJmsListenerContainerFactory() {
+    @Bean
+    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory() {
         sqsConnectionFactory = new SQSConnectionFactory(
                 new ProviderConfiguration(),
                 AmazonSQSClientBuilder.standard()

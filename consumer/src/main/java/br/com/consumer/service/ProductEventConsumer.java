@@ -33,7 +33,7 @@ public class ProductEventConsumer {
 
         final Envelope envelope = objectMapper.readValue(snsMessage.getMessage(), Envelope.class);
 
-        ProductEvent productEvent = objectMapper.readValue(envelope.getData(), ProductEvent.class);
+        final ProductEvent productEvent = objectMapper.readValue(envelope.getData(), ProductEvent.class);
 
         LOG.info("Product event received - Event: {} - ProductId: {} - ",
                 envelope.getEventType(),
